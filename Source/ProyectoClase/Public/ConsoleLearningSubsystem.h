@@ -38,6 +38,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void ReceivePrompt(FString Prompt);
 
+	UFUNCTION(BlueprintCallable)
+	bool IsPausedGame();
+
 public:
 
 	void Internal_WaitPrompt() const;

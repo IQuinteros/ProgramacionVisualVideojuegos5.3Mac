@@ -3,6 +3,8 @@
 
 #include "ConsoleLearningSubsystem.h"
 
+#include "Kismet/GameplayStatics.h"
+
 void UConsoleLearningSubsystem::PrintMessage(const UObject* WorldContextObject, FString Message)
 {
 	check(WorldContextObject);
@@ -20,12 +22,19 @@ void UConsoleLearningSubsystem::PrintMessage(const UObject* WorldContextObject, 
 void UConsoleLearningSubsystem::ReceivePrompt(FString Prompt)
 {
 	UE_LOG(LogTemp, Warning, TEXT("UConsoleLearningSubsystem::ReceivePrompt: Received prompt: %s"), *Prompt);
+	UGameplayStatics::SetGamePaused(GetWorld(), false);
 	OnPromptReceived.Broadcast(Prompt);
+}
+
+bool UConsoleLearningSubsystem::IsPausedGame()
+{
+	return UGameplayStatics::IsGamePaused(GetWorld());
 }
 
 void UConsoleLearningSubsystem::Internal_WaitPrompt() const
 {
 	UE_LOG(LogTemp, Warning, TEXT("UConsoleLearningSubsystem::Internal_WaitPrompt: Waiting for prompt..."));
+	UGameplayStatics::SetGamePaused(GetWorld(), true);
 	OnPromptRequested.Broadcast();
 }
 
