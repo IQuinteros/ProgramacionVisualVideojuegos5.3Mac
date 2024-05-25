@@ -70,4 +70,4 @@ Plugins/*/Intermediate/*
 DerivedDataCache/*
 
 # Avoid binaries dlls
-!Binaries/Win64/UE4Editor-ProyectoClase.dll
+!Binaries/Win64/UnrealEditor-ProyectoClase.dll
